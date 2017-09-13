@@ -1,15 +1,15 @@
-var DETAIL_IMAGE_SELECTOR  = '[data-image-role="target"]';
+var DETAIL_IMAGE_SELECTOR = '[data-image-role="target"]';
 var DETAIL_TITLE_SELECTOR = '[data-image-role="title"]';
 var THUMBNAIL_LINK_SELECTOR = '[data-image-role="trigger"]';
 var randomThumb;
 var stolenImg;
 
 
-function setDetails(imageUrl, titleText){
+function setDetails(imageUrl, titleText) {
   'use strict';
   var detailImage = document.querySelector(DETAIL_IMAGE_SELECTOR);
   detailImage.setAttribute('src', imageUrl);
-  if(imageUrl == 'img/tacocat.png'){
+  if (imageUrl == 'img/tacocat.png') {
     restoreStolen();
     randomizeTacoCat();
   }
@@ -20,24 +20,24 @@ function setDetails(imageUrl, titleText){
   detailTitle.textContent = titleText;
 }
 
-function imageFromThumb(thumbnail){
+function imageFromThumb(thumbnail) {
   'use strict';
   return thumbnail.getAttribute('data-image-url');
 }
 
-function titleFromThumb(thumbnail){
+function titleFromThumb(thumbnail) {
   'use strict';
   return thumbnail.getAttribute('data-image-title');
 }
 
-function setDetailsFromThumb(thumbnail){
+function setDetailsFromThumb(thumbnail) {
   'use strict';
   setDetails(imageFromThumb(thumbnail), titleFromThumb(thumbnail));
 }
 
-function addThumbClickHandler(thumb){
+function addThumbClickHandler(thumb) {
   'use strict';
-  thumb.addEventListener('click', function (event) {
+  thumb.addEventListener('click', function(event) {
     event.preventDefault();
 
 
@@ -52,20 +52,20 @@ function getThumbnailsArray() {
   return thumbnailArray;
 }
 
-function initializeEvents(){
+function initializeEvents() {
   'use strict';
   var thumbnails = getThumbnailsArray();
   thumbnails.forEach(addThumbClickHandler);
 }
 
-function randomizeTacoCat(){
+function randomizeTacoCat() {
   var thumbnails = getThumbnailsArray();
   randomThumb = thumbnails[Math.floor(Math.random() * thumbnails.length)];
   stolenImg = randomThumb.getAttribute('data-image-url');
   randomThumb.setAttribute('data-image-url', 'img/tacocat.png')
 }
 
-function restoreStolen(){
+function restoreStolen() {
   randomThumb.setAttribute('data-image-url', stolenImg);
 }
 
